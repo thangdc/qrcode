@@ -1,7 +1,7 @@
-﻿<header class="header" ng-include="'/app/home/partials/header.html'"></header>
+﻿<header class="header" ng-include="'app/home/partials/header.html'"></header>
 
 <div class="wrapper row-offcanvas row-offcanvas-left">
-    <aside class="left-side sidebar-offcanvas" ng-include="'/app/home/partials/menu.html'">
+    <aside class="left-side sidebar-offcanvas" ng-include="'app/home/partials/menu.html'">
         
     </aside>
     <aside class="right-side">
@@ -262,33 +262,7 @@
                         </div>
                         <div class="box-body">
                             <img alt="" class="qrCodeImageData" ng-src="{{ qr.result.Value }}" />
-                            <!--<div class="wraptext">
-                                <span ng-if="qr.type == 'vanban'">
-                                    {{ qr.text.Message }}
-                                </span>
-                                <span ng-if="qr.type == 'tinnhansms'">
-                                    {{ qr.sms.Number }}
-                                </span>
-                                <span ng-if="qr.type == 'email'">
-                                    {{ qr.email.EmailAddress }}
-                                </span>
-                                <span ng-if="qr.type == 'dienthoai'">
-                                    {{ qr.phone.Number }}
-                                </span>
-                                <span ng-if="qr.type == 'lienhe'">
-                                    {{ qr.contact.FullName }}
-                                </span>
-                                <span ng-if="qr.type == 'diachi'">
-                                    {{ qr.location.Address }}
-                                </span>
-                                <span ng-if="qr.type == 'url'">
-                                    {{ qr.website.Url }}
-                                </span>
-                            </div>-->
                         </div>
-                        <!--<div class="box-footer">
-
-                        </div>-->
                     </div>
                 </div>
             </div>
