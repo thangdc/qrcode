@@ -1,0 +1,45 @@
+﻿<div class="form-box">
+    <div class="header">Đăng Ký</div>
+    <form novalidate>
+        <div class="body bg-gray">
+            <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+                {{message}}
+            </div>
+            
+            <div class="form-group">
+                <input type="text" ng-model="user.UserName" class="form-control" placeholder="Tên đăng nhập"/>
+            </div>
+            <div class="form-group">
+                <input type="text" ng-model="user.Email" class="form-control" placeholder="Địa chỉ email" />
+            </div>
+            <div class="form-group">
+                <input type="password" ng-model="user.Password" class="form-control" placeholder="Mật khẩu"/>
+            </div>
+            <div class="form-group">
+                <input type="password" ng-model="user.Confirm" class="form-control" placeholder="Xác nhận mật khẩu"/>
+            </div>
+            <div data-ng-show="errors.length > 0 && savedSuccessfully == false" class="alert alert-danger">
+                <div ng-repeat="err in errors">
+                    <div>{{ err }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <button class="btn bg-info btn-block" ng-click="register(user)">
+                <i class="fa fa-unlock"></i> Đăng ký tài khoản
+            </button>
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="/#/login" class="btn bg-info btn-block text-center">
+                        <i class="fa fa-user"></i> Đã có tài khoản
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="/#/home" class="btn bg-info btn-block text-center">
+                        <i class="fa fa-reply-all"></i> Trở về trang chủ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
