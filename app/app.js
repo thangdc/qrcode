@@ -29,7 +29,7 @@ vietsoftApp.config(['$routeProvider', '$locationProvider', function ($routeProvi
 
 }]);
 
-var serviceBase = 'http://localhost:50360';
+var serviceBase = 'http://vietsoft.apphb.com';
 vietsoftApp.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase
 });
