@@ -4,7 +4,7 @@ vietsoftApp.config(['$routeProvider', '$locationProvider', function ($routeProvi
 
     $routeProvider.
         when('/', {
-            templateUrl: 'a/app/home/partials/home.html',
+            templateUrl: 'app/home/partials/home.html',
             controller: 'HomeCtrl'
         })
         .when('/qrCode', {
