@@ -4,23 +4,23 @@ vietsoftApp.config(['$routeProvider', '$locationProvider', function ($routeProvi
 
     $routeProvider.
         when('/', {
-            templateUrl: 'app/home/partials/home.html',
+            templateUrl: '/app/home/partials/home.html',
             controller: 'HomeCtrl'
         })
         .when('/qrCode', {
-            templateUrl: 'app/qrcode/partials/qrCode.html',
+            templateUrl: '/app/qrcode/partials/qrCode.html',
             controller: 'QRCodeCtrl'
         })
         .when('/login', {
-            templateUrl: 'app/home/partials/login.html',
+            templateUrl: '/app/home/partials/login.html',
             controller: 'HomeCtrl'
         })
         .when('/register', {
-            templateUrl: 'app/home/partials/register.html',
+            templateUrl: '/app/home/partials/register.html',
             controller: 'HomeCtrl'
         })
         .when('/forgetPassword', {
-            templateUrl: 'app/home/partials/forgetPassword.html',
+            templateUrl: '/app/home/partials/forgetPassword.html',
             controller: 'HomeCtrl'
         })
         .otherwise({
