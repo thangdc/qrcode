@@ -27,6 +27,14 @@ vietsoftApp.config(['$routeProvider', '$locationProvider', function ($routeProvi
             templateUrl: '/app/home/partials/changePassword.html',
             controller: 'ChangePasswordCtrl'
         })
+		.when('/emailMarketing', {
+            templateUrl: '/app/emailMarketing/partials/emailMarketing.html',
+            controller: 'EmailMarketingCtrl'
+        })
+        .when('/qrCodeBHYT', {
+            templateUrl: '/app/qrcode/partials/qrCodeBHYT.html',
+            controller: 'QRCodeBHYTCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });

@@ -1,0 +1,75 @@
+﻿<header class="header" ng-include="'/app/home/partials/header.html'"></header>
+
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <aside class="left-side sidebar-offcanvas" ng-include="'/app/home/partials/menu.html'"></aside>
+    <aside class="right-side">
+        <section class="content-header">
+            <h1>Email Marketing</h1>
+            <ol class="breadcrumb">
+                <li><a href="/#/"><i class="fa fa-home"></i> Home</a></li>
+                <li class="active">Email Marketing</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a showtab="" href="#website" data-toggle="tab"><i class="fa fa-link"></i> Website</a></li>
+                    <li><a showtab="" href="#copypaste" data-toggle="tab"><i class="fa fa-clipboard"></i> Chép/Dán</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="website">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Lấy địa chỉ email từ website</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <input type="text" ng-model="emailMarketing.Url" placeholder="Url" value="http://z7.invisionfree.com/98L1/ar/t19.htm" class="form-control" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="button" value="Lấy email" ng-click="crawlEmail(emailMarketing)" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="overlay" data-ng-show="isQueryUrl"></div>
+                            <div class="loading-img" data-ng-show="isQueryUrl"></div>
+                        </div>
+                        
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Email</th>
+                                    <th style="width: 320px;">Source</th>
+                                </tr>
+                                <tr ng-repeat="email in emailMarketing.Results">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{email}}</td>
+                                    <td>
+                                        <div class="wraptext" style="width: 320px;">{{emailMarketing.Url}}</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="tab-pane" id="copypaste">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Chép/Dán</h3>
+                            </div>
+                            <div class="box-body">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <textarea class="form-control" ng-model="emailMarketing.Results" rows="10" placeholder="Nội dung ..."></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </aside>
+</div>
