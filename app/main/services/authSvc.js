@@ -1,4 +1,4 @@
-﻿vietsoftApp.factory('authService', function ($resource, $q, $http, localStorageService) {
+﻿vietsoftApp.factory('authService', function ($resource, $q, $http, ngAuthSettings, localStorageService) {
 
     var authServiceFactory = {};
     var _authentication = {
@@ -12,7 +12,7 @@
 
         var deferred = $q.defer();
         var current = this;
-        $http.post('/token', data, {
+        $http.post(ngAuthSettings.apiServiceBaseUri + '/token', data, {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         }).success(function (response) {
 
@@ -34,15 +34,15 @@
 
     var _register = function (user) {
         this.logout();
-        return $resource('/api/Account/Register', user).save(user);
+        return $resource(ngAuthSettings.apiServiceBaseUri + '/api/Account/Register', user).save(user);
     };
 
     var _resetPassword = function (user) {
-        return $resource('/api/Account/ForgetPassword', user).save(user);
+        return $resource(ngAuthSettings.apiServiceBaseUri + '/api/Account/ForgetPassword', user).save(user);
     }
 
     var _updatePassword = function (user) {
-        return $resource('/api/Account/ChangePassword', user).save(user);
+        return $resource(ngAuthSettings.apiServiceBaseUri + '/api/Account/ChangePassword', user).save(user);
     }
 
     var _logout = function () {
