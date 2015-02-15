@@ -1,13 +1,13 @@
-﻿vietsoftApp.factory('qrCodeServices', function ($resource) {
+﻿vietsoftApp.factory('qrCodeServices', function ($resource, ngAuthSettings) {
 
     var result = {};
 
     var _listQrCode = function () {
-        return $resource('/api/QRCode/ListQRCode').query();
+        return $resource(ngAuthSettings.apiServiceBaseUri + '/api/QRCode/ListQRCode').query();
     }
 
     var _removeQRCode = function (id) {
-        return $resource('/api/QRCode/DeleteQRCode', { id: id }).save();
+        return $resource(ngAuthSettings.apiServiceBaseUri + '/api/QRCode/DeleteQRCode', { id: id }).save();
     }
 
     result.showQRCode = _listQrCode;

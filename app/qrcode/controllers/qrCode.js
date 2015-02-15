@@ -1,4 +1,4 @@
-﻿vietsoftApp.controller('QRCodeCtrl', function ($scope, $http, $resource, qrCodeServices) {
+﻿vietsoftApp.controller('QRCodeCtrl', function ($scope, $http, $resource, ngAuthSettings, qrCodeServices) {
     $scope.qrCodes = [];
 
     $scope.qrcodeData = {
@@ -166,7 +166,7 @@
         if ($scope.isValid) {
             $scope.qrcodeData.result.IsLoading = true;
 
-            $http.post('/api/QRCode/Generate', JSON.stringify(qrCodeData))
+            $http.post(ngAuthSettings.apiServiceBaseUri + '/api/QRCode/Generate', JSON.stringify(qrCodeData))
             .then(function (result) {
                 $scope.qrcodeData.result.IsLoading = false;
                 $scope.qrcodeData.result.Value = "data:image/png;base64," + result.data;
