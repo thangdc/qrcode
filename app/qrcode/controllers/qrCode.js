@@ -276,10 +276,12 @@
     return {
         link: function (scope, element, attrs) {
             element.click(function (e) {
-                scope.qrcodeData.type = attrs.href.substr(1, attrs.href.length);
+                if (scope.qrcodeData)
+                    scope.qrcodeData.type = attrs.href.substr(1, attrs.href.length);
                 e.preventDefault();
                 $(element).tab('show');
-                google.maps.event.trigger(scope.map, "resize");
+                if (scope.map)
+                    google.maps.event.trigger(scope.map, "resize");
             });
         }
     };
