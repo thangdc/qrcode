@@ -1,28 +1,30 @@
-﻿<div class="form-box">
+﻿<div class="form-box box custombox">
     <div class="header">Đăng Ký</div>
     <form novalidate>
         <div class="body bg-gray">
-            <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+            <div data-ng-show="savedSuccessfully == true" class="alert alert-success">
                 {{message}}
             </div>
-            
+
             <div class="form-group">
-                <input type="text" ng-model="user.UserName" class="form-control" placeholder="Tên đăng nhập"/>
+                <input type="text" ng-model="user.UserName" class="form-control" placeholder="Tên đăng nhập" />
             </div>
             <div class="form-group">
                 <input type="text" ng-model="user.Email" class="form-control" placeholder="Địa chỉ email" />
             </div>
             <div class="form-group">
-                <input type="password" ng-model="user.Password" class="form-control" placeholder="Mật khẩu"/>
+                <input type="password" ng-model="user.Password" class="form-control" placeholder="Mật khẩu" />
             </div>
             <div class="form-group">
-                <input type="password" ng-model="user.Confirm" class="form-control" placeholder="Xác nhận mật khẩu"/>
+                <input type="password" ng-model="user.Confirm" class="form-control" placeholder="Xác nhận mật khẩu" />
             </div>
             <div data-ng-show="errors.length > 0 && savedSuccessfully == false" class="alert alert-danger">
                 <div ng-repeat="err in errors">
                     <div>{{ err }}</div>
                 </div>
             </div>
+            <div class="overlay" data-ng-show="registerLoading"></div>
+            <div class="loading-img" data-ng-show="registerLoading"></div>
         </div>
         <div class="footer">
             <button class="btn bg-info btn-block" ng-click="register(user)">

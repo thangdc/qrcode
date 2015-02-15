@@ -13,15 +13,19 @@ vietsoftApp.config(['$routeProvider', '$locationProvider', function ($routeProvi
         })
         .when('/login', {
             templateUrl: '/app/home/partials/login.html',
-            controller: 'HomeCtrl'
+            controller: 'LoginCtrl'
         })
         .when('/register', {
             templateUrl: '/app/home/partials/register.html',
-            controller: 'HomeCtrl'
+            controller: 'RegisterCtrl'
         })
         .when('/forgetPassword', {
             templateUrl: '/app/home/partials/forgetPassword.html',
-            controller: 'HomeCtrl'
+            controller: 'ForgetPasswordCtrl'
+        })
+        .when('/changePassword', {
+            templateUrl: '/app/home/partials/changePassword.html',
+            controller: 'ChangePasswordCtrl'
         })
         .otherwise({
             redirectTo: '/'
@@ -29,7 +33,7 @@ vietsoftApp.config(['$routeProvider', '$locationProvider', function ($routeProvi
 
 }]);
 
-var serviceBase = 'http://localhost:50360';
+var serviceBase = 'http://vietsoft.apphb.com';
 vietsoftApp.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase
 });

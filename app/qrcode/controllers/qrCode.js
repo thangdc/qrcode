@@ -1,7 +1,5 @@
-﻿vietsoftApp.controller('QRCodeCtrl', function ($scope, $http, $resource, ngAuthSettings) {
-    
-	var domain = ngAuthSettings.apiServiceBaseUri;
-	$scope.qrCodes = [];
+﻿vietsoftApp.controller('QRCodeCtrl', function ($scope, $http, $resource, qrCodeServices) {
+    $scope.qrCodes = [];
 
     $scope.qrcodeData = {
         type: "vanban",
@@ -168,14 +166,11 @@
         if ($scope.isValid) {
             $scope.qrcodeData.result.IsLoading = true;
 
-            $http.post(domain + '/api/QRCode', JSON.stringify(qrCodeData))
+            $http.post('/api/QRCode/Generate', JSON.stringify(qrCodeData))
             .then(function (result) {
                 $scope.qrcodeData.result.IsLoading = false;
                 $scope.qrcodeData.result.Value = "data:image/png;base64," + result.data;
-
-                var qrData = new Object();
-                angular.copy(qrCodeData, qrData);
-                $scope.qrCodes.push(qrData);
+                listQRCode();
             },
             function (response) {
                 alert('Bạn cần phải đăng nhập để thực hiện chức năng này.');
@@ -257,9 +252,26 @@
         });
     };
 
-    $scope.removeQRCode = function ($index) {
-        $scope.qrCodes.splice($index, 1);
+    $scope.removeQRCode = function (id) {
+        qrCodeServices.removeQRCode(id).$promise.then(function(){
+            listQRCode();
+        });
     };
+
+    
+    listQRCode();
+    $scope.qrCodes = [];
+    $scope.qrCodeLoading = false;
+    function listQRCode() {
+        $scope.qrCodeLoading = true;
+        qrCodeServices.showQRCode().$promise.then(function (response) {
+            $scope.qrCodes = response;
+            $scope.qrCodeLoading = false;
+        }, function () {
+            $scope.qrCodeLoading = false;
+        });
+    }
+
 }).directive('showtab', function () {
     return {
         link: function (scope, element, attrs) {

@@ -221,50 +221,60 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                
-                <div class="col-sm-6 col-md-3" ng-repeat="qr in qrCodes | reverse">
-                    <div class="box box-solid box-info">
-                        <div class="box-header">
-                            <h3 class="box-title">
-                                <span ng-if="qr.type == 'vanban'">
-                                    <i ng-class="qr.encrypt.IsEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i> 
-                                    Văn bản
-                                </span>
-                                <span ng-if="qr.type == 'tinnhansms'">
-                                    <i ng-class="qr.encrypt.IsEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i> 
-                                    SMS
-                                </span>
-                                <span ng-if="qr.type == 'email'">
-                                    <i ng-class="qr.encrypt.IsEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i> 
-                                    Email
-                                </span>
-                                <span ng-if="qr.type == 'dienthoai'">
-                                    <i ng-class="qr.encrypt.IsEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i> 
-                                    Điện thoại
-                                </span>
-                                <span ng-if="qr.type == 'lienhe'">
-                                    <i ng-class="qr.encrypt.IsEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i> 
-                                    Liên hệ
-                                </span>
-                                <span ng-if="qr.type == 'diachi'">
-                                    <i ng-class="qr.encrypt.IsEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i> 
-                                    Địa chỉ
-                                </span>
-                                <span ng-if="qr.type == 'url'">
-                                    <i ng-class="qr.encrypt.IsEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i> 
-                                    Website
-                                </span>
-                            </h3>
-                            <div class="box-tools pull-right">
-                                <button class="btn btn-danger btn-sm" ng-click="removeQRCode($index)" data-widget="remove"><i class="fa fa-times"></i></button>
+            <div class="box box-info" style="min-height: 240px;">
+                <div class="box-header">
+                    <i class="fa fa-bullhorn"></i>
+                    <h3 class="box-title">Danh sách mã QR Code đã tạo</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3" ng-repeat="qr in qrCodes | reverse">
+                            <div class="box box-solid box-info">
+                                <div class="box-header">
+                                    <h3 class="box-title">
+                                        <span ng-if="qr.type == 'vanban'">
+                                            <i ng-class="qr.isEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i>
+                                            Văn bản
+                                        </span>
+                                        <span ng-if="qr.type == 'tinnhansms'">
+                                            <i ng-class="qr.isEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i>
+                                            SMS
+                                        </span>
+                                        <span ng-if="qr.type == 'email'">
+                                            <i ng-class="qr.isEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i>
+                                            Email
+                                        </span>
+                                        <span ng-if="qr.type == 'dienthoai'">
+                                            <i ng-class="qr.isEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i>
+                                            Điện thoại
+                                        </span>
+                                        <span ng-if="qr.type == 'lienhe'">
+                                            <i ng-class="qr.isEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i>
+                                            Liên hệ
+                                        </span>
+                                        <span ng-if="qr.type == 'diachi'">
+                                            <i ng-class="qr.isEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i>
+                                            Địa chỉ
+                                        </span>
+                                        <span ng-if="qr.type == 'url'">
+                                            <i ng-class="qr.isEncrypt == true ? 'fa fa-lock' : 'fa fa-unlock'"></i>
+                                            Website
+                                        </span>
+                                    </h3>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-danger btn-sm" ng-click="removeQRCode(qr.id)" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <img alt="" class="qrCodeImageData" ng-src="{{ qr.qrCodeImage }}" />
+                                </div>
                             </div>
                         </div>
-                        <div class="box-body">
-                            <img alt="" class="qrCodeImageData" ng-src="{{ qr.result.Value }}" />
-                        </div>
-                    </div>
+                    </div>  
                 </div>
+
+                <div class="overlay" data-ng-show="qrCodeLoading"></div>
+                <div class="loading-img" data-ng-show="qrCodeLoading"></div>
             </div>
         </section> 
     </aside>
