@@ -14,7 +14,10 @@
             },
             function (error) {
                 $scope.loading = false;
-                $scope.error = 'Vui lòng đăng nhập để thực hiện chức năng này';
+                if($scope.image == '')
+                    $scope.error = 'Vui lòng chọn ảnh thẻ BHYT cần xem thông tin';
+                else
+                    $scope.error = 'Vui lòng đăng nhập để thực hiện chức năng này';
             });
     }
 
