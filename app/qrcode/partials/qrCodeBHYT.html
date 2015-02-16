@@ -11,6 +11,10 @@
             </ol>
         </section>
         <section class="content">
+            <div class="alert alert-danger" ng-show="error.length > 0">
+                <i class="fa fa-ban"></i>
+                {{ error }}
+            </div>
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">Đọc thẻ BHYT</h3>
