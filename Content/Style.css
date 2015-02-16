@@ -6,4 +6,4 @@
 .wraptext { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .qrCodeImageData { width: 100%;}
 .alert { padding-left: 25px !important; margin-left: 0 !important;}
-.custombox { border-top: 0;}
+.custombox { border-top: 0; margin-bottom: 0;}
