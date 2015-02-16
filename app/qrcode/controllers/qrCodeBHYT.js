@@ -2,14 +2,18 @@
 
     $scope.image = '';
     $scope.result = {};
+    $scope.loading = false;
 
     $scope.decode = function () {
+        $scope.loading = true;
         qrCodeServices.decodeQRCodeBHYT($scope.image).$promise.then(
             function (response) {
+                $scope.loading = false;
                 $scope.result = response;
             },
             function (error) {
-                console.log(error);
+                $scope.loading = false;
+                alert('Đã xảy ra lỗi, vui lòng kiểm tra lại.');
             });
     }
 
