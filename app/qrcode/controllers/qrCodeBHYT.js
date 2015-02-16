@@ -17,6 +17,8 @@
                 $scope.loading = false;
                 if($scope.image == '')
                     $scope.error = 'Vui lòng chọn ảnh thẻ BHYT cần xem thông tin';
+                else if(error.status == 500)
+                    $scope.error = 'Ảnh thẻ BHYT chưa đúng, vui lòng thử lại ảnh khác.';
                 else
                     $scope.error = 'Vui lòng đăng nhập để thực hiện chức năng này';
             });
