@@ -13,6 +13,9 @@
             </ol>
         </section>
         <section class="content">
+            <div class="alert alert-danger" ng-show="qrCodeError.length > 0">
+                {{ qrCodeError }}
+            </div>
             <div class="row">
                 <div class="col-md-9">
                     <div class="nav-tabs-custom">
@@ -197,7 +200,7 @@
                                             <input type="number" ng-disabled="!qrcodeData.encrypt.IsEncrypt" ng-model="qrcodeData.encrypt.Minutes" class="form-control" placeholder="Phút" />
                                         </div>
                                         <div class="col-md-2">
-                                            <button type="button" class="btn btn-primary pull-right" ng-click="generateQRCode()"><i class="fa fa-qrcode"></i> Tạo mã</button>
+                                            <button type="button" ng-disabled="qrcodeData.result.IsLoading" class="btn btn-primary pull-right" ng-click="generateQRCode()"><i class="fa fa-qrcode"></i> Tạo mã</button>
                                         </div>
                                     </div>
                                     
