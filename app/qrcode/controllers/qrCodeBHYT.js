@@ -3,6 +3,7 @@
     $scope.image = '';
     $scope.result = {};
     $scope.loading = false;
+    $scope.error = '';
 
     $scope.decode = function () {
         $scope.loading = true;
@@ -13,7 +14,7 @@
             },
             function (error) {
                 $scope.loading = false;
-                alert('Đã xảy ra lỗi, vui lòng kiểm tra lại.');
+                $scope.error = 'Vui lòng đăng nhập để thực hiện chức năng này';
             });
     }
 
