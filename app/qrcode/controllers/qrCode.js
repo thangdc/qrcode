@@ -1,4 +1,5 @@
-﻿vietsoftApp.controller('QRCodeCtrl', function ($scope, $http, $resource, ngAuthSettings, qrCodeServices) {
+﻿vietsoftApp.controller('QRCodeCtrl', 
+	function ($scope, $http, $resource, ngAuthSettings, qrCodeServices, authService) {
     $scope.qrCodes = [];
 
     $scope.qrcodeData = {
@@ -260,8 +261,9 @@
         });
     };
 
-    
-    listQRCode();
+    if (authService.authentication.isAuth)
+		listQRCode();
+		
     $scope.qrCodes = [];
     $scope.qrCodeLoading = false;
     function listQRCode() {
