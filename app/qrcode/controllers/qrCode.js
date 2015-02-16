@@ -81,11 +81,13 @@
     };
 
     $scope.isValid = true;
+    $scope.qrCodeError = '';
 
     $scope.generateQRCode = function () {
 
         var qrCodeData = $scope.qrcodeData;
-
+	$scope.qrCodeError = '';
+	
         $scope.qrcodeValidate.text.error = false;
         $scope.qrcodeValidate.sms.number = false;
         $scope.qrcodeValidate.sms.message = false;
@@ -173,7 +175,7 @@
                 listQRCode();
             },
             function (response) {
-                alert('Bạn cần phải đăng nhập để thực hiện chức năng này.');
+                $scope.qrCodeError = 'Bạn cần phải đăng nhập để thực hiện chức năng này';
                 $scope.qrcodeData.result.IsLoading = false;
                 $scope.qrcodeData.result.Value = '';
             });
