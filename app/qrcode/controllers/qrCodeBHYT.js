@@ -7,6 +7,7 @@
 
     $scope.decode = function () {
         $scope.loading = true;
+        $scope.error = '';
         qrCodeServices.decodeQRCodeBHYT($scope.image).$promise.then(
             function (response) {
                 $scope.loading = false;
