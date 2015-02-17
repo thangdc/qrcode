@@ -35,6 +35,10 @@ vietsoftApp.config(['$routeProvider', '$locationProvider', function ($routeProvi
             templateUrl: '/app/qrcode/partials/qrCodeBHYT.html',
             controller: 'QRCodeBHYTCtrl'
         })
+		.when('/ocr', {
+            templateUrl: '/app/ocr/partials/imageToText.html',
+            controller: 'ImageToTextCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });
