@@ -1,5 +1,5 @@
 ﻿vietsoftApp.factory('imagToTextServices',
-    ['$resource', 'ngAuthSettings'
+    ['$resource', 'ngAuthSettings',
     function ($resource, ngAuthSettings) {
 
         var result = {};
