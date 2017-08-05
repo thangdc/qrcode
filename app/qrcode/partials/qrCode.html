@@ -267,29 +267,26 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							
 							<div class="row">
-								<div class="col-md-3">
-									<label>
-										<input type="checkbox" ng-model="qrcodeData.encrypt.IsEncrypt" /> Sử dụng mật khẩu
+								<div class="col-md-2">
+									<label style="margin-top: 5px;">
+										<input type="checkbox" ng-model="qrcodeData.encrypt.IsEncrypt"> Sử dụng mật khẩu
 									</label>
 								</div>
 								<div class="col-md-3">
-									<input type="password" ng-disabled="!qrcodeData.encrypt.IsEncrypt" ng-model="qrcodeData.encrypt.Password" class="form-control" placeholder="Mật khẩu" />
+									<input type="password" ng-disabled="!qrcodeData.encrypt.IsEncrypt" ng-model="qrcodeData.encrypt.Password" class="form-control" placeholder="Mật khẩu">
 								</div>
 								<div class="col-md-2">
-									<input type="number" ng-disabled="!qrcodeData.encrypt.IsEncrypt" ng-model="qrcodeData.encrypt.Hours" class="form-control" placeholder="Giờ" />
+									<input type="number" ng-disabled="!qrcodeData.encrypt.IsEncrypt" ng-model="qrcodeData.encrypt.Hours" class="form-control" placeholder="Giờ">
 								</div>
 								<div class="col-md-2">
-									<input type="number" ng-disabled="!qrcodeData.encrypt.IsEncrypt" ng-model="qrcodeData.encrypt.Minutes" class="form-control" placeholder="Phút" />
+									<input type="number" ng-disabled="!qrcodeData.encrypt.IsEncrypt" ng-model="qrcodeData.encrypt.Minutes" class="form-control" placeholder="Phút">
 								</div>
-								<div class="col-md-2">
-									<button type="button" ng-disabled="qrcodeData.result.IsLoading" class="btn btn-primary pull-right" ng-click="generateQRCode()"><i class="fa fa-qrcode"></i> Tạo mã</button>
+								<div class="col-md-3">
+									<button type="button" class="btn btn-warning" data-dismiss="modal">Hủy bỏ</button>
+									<button type="button" class="btn btn-primary">Tạo mã QR Code</button>								
 								</div>
 							</div>
-							
-							<button type="button" class="btn btn-warning" data-dismiss="modal">Hủy bỏ</button>
-							<button type="button" class="btn btn-primary">Tạo mã QR Code</button>
 						</div>
 					</div>
 				</div>
