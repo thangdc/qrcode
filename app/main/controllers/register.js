@@ -6,7 +6,7 @@
     $scope.registerLoading = false;
 
     $scope.user = {
-        UserName: '',
+        PhoneNumber: '',
         Email: '',
         Password: '',
         Confirm: ''
