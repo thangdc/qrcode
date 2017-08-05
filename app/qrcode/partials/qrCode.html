@@ -18,8 +18,24 @@
                     <h3 class="box-title">Mã QR Code</h3>
                 </div>
                 <div class="box-body">
-					<div class="text-right">
+					<div class="form-inline pull-left">
+						<div class="form-group">
+							<input type="text" ng-model="keyword" class="form-control" />
+						</div>
+						<button class="btn btn-primary" ng-click="search()">Tìm kiếm</button>
+					</div>
+					<div class="pull-right">
 						<button class="btn btn-primary" data-toggle="modal" data-target="#qrCodeDialog">Tạo mã QR Code</button>
+					</div>
+					<div>
+						<table class="table table-bordered">
+							<tbody>
+								<tr>
+									<th>Id</th>
+									<th>Noi Dung</th>
+								</tr>
+							</tbody>
+						</table>
 					</div>
                     <div class="row">
                         <div class="col-sm-6 col-md-3" ng-repeat="qr in qrCodes | reverse">
