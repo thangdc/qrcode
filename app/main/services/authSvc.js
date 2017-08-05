@@ -12,7 +12,7 @@
 
         var deferred = $q.defer();
         var current = this;
-        $http.post(ngAuthSettings.apiServiceBaseUri + '/token', data, {
+        $http.post(ngAuthSettings.apiServiceBaseUri + '/Account/Login', data, {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         }).success(function (response) {
 
