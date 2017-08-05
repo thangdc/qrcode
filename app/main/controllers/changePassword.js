@@ -7,7 +7,7 @@
     $scope.user = {
         OldPassword: '',
         NewPassword: '',
-        Confirm: ''
+        ConfirmPassword: ''
     }
 
     if (!authService.authentication.isAuth)
@@ -20,7 +20,7 @@
 
             $scope.user.OldPassword = '';
             $scope.user.NewPassword = '';
-            $scope.user.Confirm = '';
+            $scope.user.ConfirmPassword = '';
 
             $scope.savedSuccessfully = true;
             $scope.message = 'Đổi mật khẩu thành công, bạn sẽ được chuyển đến trang chủ trong 3 giây';
