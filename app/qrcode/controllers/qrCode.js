@@ -171,9 +171,16 @@
 
             $http.post(ngAuthSettings.apiServiceBaseUri + '/api/QRCode/Generate', JSON.stringify(qrCodeData))
             .then(function (result) {
-                $scope.qrcodeData.result.IsLoading = false;
-                $scope.qrcodeData.result.Value = "data:image/png;base64," + result.data;
-                listQRCode();
+				if(result.indexOf('<!DOCTYPE html>') != -1){
+					$scope.qrCodeError = 'Bạn cần phải đăng nhập để thực hiện chức năng này';
+					$scope.qrcodeData.result.IsLoading = false;
+					$scope.qrcodeData.result.Value = '';
+				}
+				else{
+					$scope.qrcodeData.result.IsLoading = false;
+					$scope.qrcodeData.result.Value = "data:image/png;base64," + result.data;
+					listQRCode();
+				}
             },
             function (response) {
                 $scope.qrCodeError = 'Bạn cần phải đăng nhập để thực hiện chức năng này';
