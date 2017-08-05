@@ -31,14 +31,43 @@
 						<br class="clear-fix" />
 					</div>
 					<div>
-						<table class="table table-bordered">
-							<tbody>
-								<tr>
-									<th>Id</th>
-									<th>Noi Dung</th>
-								</tr>
-							</tbody>
-						</table>
+						<div class="nav-tabs-custom">
+							<ul class="nav nav-tabs">
+								<li class="active"><a showtab="" href="#vanban" data-toggle="tab"><i class="fa fa-newspaper-o"></i> Văn bản</a></li>
+								<li><a showtab="" href="#listtinnhansms" data-toggle="tab"><i class="fa fa-mobile"></i> SMS</a></li>
+								<li><a showtab="" href="#listemail"><i class="fa fa-envelope"></i> Email</a></li>
+								<li><a showtab="" href="#listdienthoai"><i class="fa fa-phone"></i> Điện thoại</a></li>
+								<li><a showtab="" href="#listlienhe"><i class="fa fa-book"></i> Thông tin liên hệ</a></li>
+								<li><a showtab="" href="#listdiachi"><i class="fa fa-briefcase"></i> Địa chỉ</a></li>
+								<li><a showtab="" href="#listurl"><i class="fa fa-link"></i> Website</a></li>
+								<li class="pull-right"><a class="text-muted"><i class="fa fa-gear"></i></a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="listvanban">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th>Id</th>
+												<th>Nội dung</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+								<div class="tab-pane" id="listtinnhansms">
+								</div>
+								<div id="listemail" class="tab-pane">
+								</div>
+								<div id="listdienthoai" class="tab-pane">
+								</div>
+								<div id="listlienhe" class="tab-pane">
+								</div>
+								<div id="listdiachi" class="tab-pane">
+								</div>
+								<div id="listurl" class="tab-pane">
+								</div>
+							</div>
+						</div>
 					</div>
                     <div class="row">
                         <div class="col-sm-6 col-md-3" ng-repeat="qr in qrCodes | reverse">
