@@ -171,7 +171,7 @@
 
             $http.post(ngAuthSettings.apiServiceBaseUri + '/api/QRCode/Generate', JSON.stringify(qrCodeData))
             .then(function (result) {
-				if(result.indexOf('<!DOCTYPE html>') != -1){
+				if(result.data.indexOf('<!DOCTYPE html>') != -1){
 					$scope.qrCodeError = 'Bạn cần phải đăng nhập để thực hiện chức năng này';
 					$scope.qrcodeData.result.IsLoading = false;
 					$scope.qrcodeData.result.Value = '';
