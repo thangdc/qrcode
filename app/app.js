@@ -45,7 +45,8 @@ vietsoftApp.config(['$routeProvider', '$locationProvider', function ($routeProvi
 
 }]);
 
-var serviceBase = 'http://service.thangdc.com';
+//var serviceBase = 'http://service.thangdc.com';
+var serviceBase = 'http://localhost:5782';
 vietsoftApp.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'qrcode.thangdc.com'
