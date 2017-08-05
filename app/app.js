@@ -45,7 +45,7 @@ vietsoftApp.config(['$routeProvider', '$locationProvider', function ($routeProvi
 
 }]);
 
-var serviceBase = 'http://vietsoft.apphb.com';
+var serviceBase = 'http://service.thangdc.com';
 vietsoftApp.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase
 });
