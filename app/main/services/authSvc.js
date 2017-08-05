@@ -8,7 +8,7 @@
 
     var _login = function (user) {
         var data = "grant_type=password&username=" +
-            user.UserName + "&password=" + user.Password;
+            user.UserName + "&password=" + user.Password + "&client_id=" + ngAuthSettings.clientId;;
 
         var deferred = $q.defer();
         var current = this;
