@@ -9,7 +9,7 @@
         PhoneNumber: '',
         Email: '',
         Password: '',
-        Confirm: ''
+        ConfirmPassword: ''
     }
 
     $scope.register = function (user) {
