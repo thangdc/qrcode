@@ -7,4 +7,4 @@ a { cursor: pointer; }
 .qrCodeImageData { width: 100%;}
 .alert { padding-left: 25px !important; margin-left: 0 !important;}
 .custombox { border-top: 0; margin-bottom: 0;}
-.modal-dialog { width: auto; }
+.modal-dialog { width: 80%; }
