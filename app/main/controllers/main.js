@@ -49,7 +49,6 @@
 
     $scope.logoff = function () {
         authService.logout();
-		window.location.href = window.location.href;
     }
 	
 	$scope.loginCancel = function(){
@@ -75,6 +74,7 @@
         authService.login($scope.user).then(function (response) {
             $scope.loginLoading = false;
 			$('#loginDialog').modal('toggle');
+			window.location.reload();
         },
          function (err) {
              $scope.loginMsg = err.error_description;
