@@ -11,22 +11,6 @@ vietsoftApp.config(['$routeProvider', '$locationProvider', function ($routeProvi
             templateUrl: '/app/qrcode/partials/qrCode.html',
             controller: 'QRCodeCtrl'
         })
-        .when('/login', {
-            templateUrl: '/app/home/partials/login.html',
-            controller: 'LoginCtrl'
-        })
-        .when('/register', {
-            templateUrl: '/app/home/partials/register.html',
-            controller: 'RegisterCtrl'
-        })
-        .when('/forgetPassword', {
-            templateUrl: '/app/home/partials/forgetPassword.html',
-            controller: 'ForgetPasswordCtrl'
-        })
-        .when('/changePassword', {
-            templateUrl: '/app/home/partials/changePassword.html',
-            controller: 'ChangePasswordCtrl'
-        })
 		.when('/emailMarketing', {
             templateUrl: '/app/emailMarketing/partials/emailMarketing.html',
             controller: 'EmailMarketingCtrl'

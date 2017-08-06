@@ -1,47 +1,51 @@
-﻿<div class="form-box">
-    <div class="header">Đăng Ký</div>
-    <form novalidate>
-        <div class="body bg-gray box custombox">
-            <div data-ng-show="savedSuccessfully == true" class="alert alert-success">
-                {{message}}
-            </div>
+﻿<div id="registerDialog" class="modal fade" tabindex="-1" role="dialog" >
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Đăng Ký</h4>
+			</div>
+			<div class="modal-body">
+				<form novalidate>
+					<div>
+						<div data-ng-show="savedSuccessfully == true" class="alert alert-success">
+							{{message}}
+						</div>
 
-            <div class="form-group">
-                <input type="text" ng-model="user.Email" class="form-control" placeholder="Địa chỉ email" />
-            </div>            
-            <div class="form-group">
-                <input type="text" ng-model="user.PhoneNumber" class="form-control" placeholder="Điện thoại" />
-            </div>
-            <div class="form-group">
-                <input type="password" ng-model="user.Password" class="form-control" placeholder="Mật khẩu" />
-            </div>
-            <div class="form-group">
-                <input type="password" ng-model="user.ConfirmPassword" class="form-control" placeholder="Xác nhận mật khẩu" />
-            </div>
-            <div data-ng-show="errors.length > 0 && savedSuccessfully == false" class="alert alert-danger">
-                <div ng-repeat="err in errors">
-                    <div>{{ err }}</div>
-                </div>
-            </div>
-            <div class="overlay" data-ng-show="registerLoading"></div>
-            <div class="loading-img" data-ng-show="registerLoading"></div>
-        </div>
-        <div class="footer">
-            <button class="btn bg-info btn-block" ng-click="register(user)">
-                <i class="fa fa-unlock"></i> Đăng ký tài khoản
-            </button>
-            <div class="row">
-                <div class="col-md-6">
-                    <a href="/#/login" class="btn bg-info btn-block text-center">
-                        <i class="fa fa-user"></i> Đã có tài khoản
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <a href="/#/home" class="btn bg-info btn-block text-center">
-                        <i class="fa fa-reply-all"></i> Trở về trang chủ
-                    </a>
-                </div>
-            </div>
-        </div>
-    </form>
+						<div class="form-group">
+							<label>Địa chỉ email</label>
+							<input type="text" ng-model="userRegister.Email" class="form-control" placeholder="Địa chỉ email" />
+						</div>            
+						<div class="form-group">
+							<label>Điện thoại</label>
+							<input type="text" ng-model="userRegister.PhoneNumber" class="form-control" placeholder="Điện thoại" />
+						</div>
+						<div class="form-group">
+							<label>Mật khẩu</label>
+							<input type="password" ng-model="userRegister.Password" class="form-control" placeholder="Mật khẩu" />
+						</div>
+						<div class="form-group">
+							<label>Xác nhận mật khẩu</label>
+							<input type="password" ng-model="userRegister.ConfirmPassword" class="form-control" placeholder="Xác nhận mật khẩu" />
+						</div>
+						<div data-ng-show="errors.length > 0 && savedSuccessfully == false" class="alert alert-danger">
+							<div ng-repeat="err in errors">
+								<div>{{ err }}</div>
+							</div>
+						</div>
+						<div class="overlay" data-ng-show="registerLoading"></div>
+						<div class="loading-img" data-ng-show="registerLoading"></div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button ng-click="registerCancel()" class="btn btn-warning">
+					<i class="fa fa-reply-all"></i> Hủy bỏ
+				</button>
+				<button class="btn btn-primary" ng-click="register()">
+					<i class="fa fa-unlock"></i> Đăng ký
+				</button>
+			</div>
+		</div>
+	</div>
 </div>

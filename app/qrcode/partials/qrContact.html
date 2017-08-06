@@ -1,0 +1,126 @@
+<div ng-controller="QRContactCtrl">
+	<div style="margin-bottom: 20px;">
+		<div class="form-inline pull-left">
+			<div class="form-group">
+				<input type="text" ng-model="paging.keyword" class="form-control" ng-keypress="enterSearch($event)" />
+			</div>
+			<button class="btn btn-primary" ng-click="search()">Tìm kiếm</button>
+		</div>
+		<div class="pull-right">
+			<button class="btn btn-warning" ng-click="exportQRCode()">Export</button>
+			<button class="btn btn-warning" ng-click="importQRCode()">Import</button>
+			<button class="btn btn-danger" ng-click="deleteSelectedQRCode()">Xóa QR Code</button>
+			<button class="btn btn-primary" data-toggle="modal" ng-click="showQRCodeDialog()">Tạo mã QR Code</button>
+		</div>
+		<br style="clear: both" />
+	</div>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<td style="width: 40px; text-align: center;"><input ng-click="checkAll($event, 'qrcodeContact')" name='all' type="checkbox" /></td>
+				<th>Tên đầy đủ</th>
+				<th>Số điện thoại</th>
+				<th>Địa chỉ Email</th>
+				<th>Địa chỉ</th>
+				<th>Website</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="qr in qrCodes">
+				<td style="width: 40px; text-align: center;"><input type="checkbox" value="{{ qr.id }}" name="qrcodeContact" /></td>
+				<td>{{ qr.fullName }}</td>
+				<td>{{ qr.phoneNumber }}</td>
+				<td>{{ qr.email }}</td>
+				<td>{{ qr.address }}</td>
+				<td>{{ qr.website }}</td>
+				<td style="width: 180px; text-align: center;">
+					<button class="btn btn-primary" ng-click="showUpdateQRCode(qr.id)">Chỉnh sửa</button>
+					<button class="btn btn-danger" ng-click="deleteQRCode(qr.id)">Xóa</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<span style="padding-top: 25px" class="pull-left">Hiển thị từ {{ paging.from }} đến {{ paging.to }} trong tổng số {{ paging.totalCount }} mẫu tin</span>
+		<nav aria-label="..." class="pull-right">
+		  <ul class="pagination">
+			<li class="page-item" ng-class="paging.hasPrevious == false ? 'disabled' : ''">
+			  <a class="page-link" ng-click="previous()" tabindex="-1">Quay lại</a>
+			</li>
+			<li class="page-item" ng-class="paging.hasNext == false? 'disabled' : ''">
+			  <a class="page-link" ng-click="next()">Tiếp theo</a>
+			</li>
+		  </ul>
+		</nav>
+		<br style="clear: both"/>
+	</div>
+	<div class="overlay" data-ng-show="qrCodeLoading"></div>
+	
+	<!-- New Dialog -->
+	<div id="qrCodeContactDialog" class="modal fade" tabindex="-1" role="dialog" >
+		<div class="modal-dialog modal-dialog-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">QR Code</h4>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger" ng-show="qrCodeError.length > 0">
+						{{ qrCodeError }}
+					</div>
+					<div class="row">
+						<div class="col-md-9">
+							<div class="box box-solid box-primary">
+								<div class="box-header">
+									<h3 class="box-title">Thông tin liên hệ</h3>
+								</div>
+								<div class="box-body">
+									<div class="form-group">
+										<input type="text" class="form-control" ng-model="qrcodeContact.item.fullName" placeholder="Tên đầy đủ" />
+									</div>
+									<div class="form-group" ng-class="qrcodeValidate.phoneNumber == true ? 'has-warning' : ''">
+										<label ng-show="qrcodeValidate.phoneNumber"><i class="fa fa-warning"></i> Vui lòng nhập số điện thoại cần mã hóa</label>
+										<input type="text" class="form-control" ng-model="qrcodeContact.item.phoneNumber" placeholder="Số điện thoại" />
+									</div>
+									<div class="form-group" ng-class="qrcodeValidate.email == true ? 'has-warning' : ''">
+										<label ng-show="qrcodeValidate.email"><i class="fa fa-warning"></i> Vui lòng nhập địa chỉ email cần mã hóa</label>
+										<input type="text" class="form-control" ng-model="qrcodeContact.item.email" placeholder="Địa chỉ Email" />
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control" ng-model="qrcodeContact.item.address" placeholder="Địa chỉ" />
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control" ng-model="qrcodeContact.item.webiste" placeholder="Website" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="box box-solid box-primary">
+								<div class="box-header">
+									<h3 class="box-title">Kết quả</h3>
+								</div>
+								<div class="box-body">
+									<div class="qrCodeResult">
+										<img alt="" ng-src="{{ qrcodeContact.code }}" class="qrCodeImage" />
+									</div>
+								</div>
+								<div class="overlay" ng-show="isLoading"></div>
+								<div class="loading-img" ng-show="isLoading"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-warning" data-dismiss="modal">Hủy bỏ</button>
+					<button class="btn btn-primary" ng-click="SaveQRCode()">{{ saveButton }}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Import Dialog -->
+	
+	<!-- Export Dialog -->
+</div>

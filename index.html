@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html lang="en" data-ng-class="isBlack == false ? '' : 'bg-black'" data-ng-controller="MainCtrl" data-ng-app="vietsoftApp">
+<html lang="en" data-ng-controller="MainCtrl" data-ng-app="vietsoftApp">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width" />
     <title>Phần Mềm Việt - VietSoft</title>
 	<base href="/">
-    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
 
     <link href="/Libs/Bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 	<link href="/Libs/Bootstrap/css/font-awesome.min.css" rel="stylesheet"/>
@@ -28,10 +28,14 @@
 	<script src="/app/main/controllers/main.js"></script>
 	<script src="/app/main/controllers/changePassword.js"></script>
 	<script src="/app/main/controllers/forgetPassword.js"></script>
-	<script src="/app/main/controllers/login.js"></script>
-	<script src="/app/main/controllers/register.js"></script>
 	<script src="/app/home/controllers/home.js"></script>
 	<script src="/app/qrcode/controllers/qrCode.js"></script>
+	<script src="/app/qrcode/controllers/qrContent.js"></script>
+	<script src="/app/qrcode/controllers/qrSMS.js"></script>
+	<script src="/app/qrcode/controllers/qrEmail.js"></script>
+	<script src="/app/qrcode/controllers/qrPhone.js"></script>
+	<script src="/app/qrcode/controllers/qrContact.js"></script>
+	<script src="/app/qrcode/controllers/qrWebsite.js"></script>
 	<script src="/app/main/services/authSvc.js"></script>
 	<script src="/app/main/services/authInterceptorService.js"></script>
 	<script src="/app/main/services/qrCodeSvc.js"></script>
@@ -42,17 +46,17 @@
 	<script src="/app/ocr/services/imageToText.js"></script>
 
 	<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  /*(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-56112101-3', 'auto');
-  ga('send', 'pageview');
+  ga('send', 'pageview');*/
 
 </script>
 </head>
-<body data-ng-class="isBlack == false ? 'skin-blue' : 'bg-black'" data-ng-view>
+<body class="skin-blue" data-ng-view>
 
 </body>
 </html>

@@ -2,8 +2,8 @@
 
     var result = {};
 
-    var _listQrCode = function () {
-        return $resource(ngAuthSettings.apiServiceBaseUri + '/api/QRCode/ListQRCode').query();
+    var _listQrCode = function (url) {
+        return $resource(url).query();
     }
 
     var _removeQRCode = function (id) {

@@ -1,8 +1,21 @@
 ﻿vietsoftApp.controller('QRCodeCtrl', 
 	function ($scope, $http, $resource, ngAuthSettings, qrCodeServices, authService) {
     $scope.qrCodes = [];
-
+	
+	$scope.paging = {
+		keyword: '',
+		pageSize: 10,
+		pageIndex: 1, 
+		totalCount: 0,
+		totalPage: 0,
+		from: 0,
+		to: 0,
+		hasPrevious: false,
+		hasNext: true
+	};
+	
     $scope.qrcodeData = {
+		id: 0,
         type: "vanban",
         text: {
             Message: ""
@@ -44,7 +57,9 @@
         result: {
             IsLoading: false,
             Value: ""
-        }
+        },
+		createdDate: '',
+		updatedDate: ''
     };
 
     $scope.qrcodeValidate = {
@@ -83,12 +98,13 @@
 
     $scope.isValid = true;
     $scope.qrCodeError = '';
+	$scope.isAdd = true;
 
     $scope.generateQRCode = function () {
-
+		
         var qrCodeData = $scope.qrcodeData;
-	$scope.qrCodeError = '';
-	
+		$scope.qrCodeError = '';
+		
         $scope.qrcodeValidate.text.error = false;
         $scope.qrcodeValidate.sms.number = false;
         $scope.qrcodeValidate.sms.message = false;
@@ -168,25 +184,72 @@
 
         if ($scope.isValid) {
             $scope.qrcodeData.result.IsLoading = true;
-
-            $http.post(ngAuthSettings.apiServiceBaseUri + '/api/QRCode/Generate', JSON.stringify(qrCodeData))
-            .then(function (result) {
-				if(result.data.indexOf('<!DOCTYPE html>') != -1){
+			var controller = '';
+			var qrCodeInfo = {};
+			switch (qrCodeData.type) {
+				case 'vanban':
+					controller = '/api/QRContents';
+					qrCodeInfo = { id: $scope.qrcodeData.id, content: $scope.qrcodeData.text.Message, createdDate: $scope.qrcodeData.createdDate, updatedDate: $scope.qrcodeData.updatedDate };
+					break;
+				case 'tinnhansms':
+					controller = '/api/QRSMS';
+					qrCodeInfo = $scope.qrcodeData.sms;
+					break;
+				case 'email':
+					controller = '/api/QREmails';
+					qrCodeInfo = $scope.qrcodeData.email;
+					break;
+				case 'dienthoai':
+					controller = '/api/QRPhones';
+					qrCodeInfo = $scope.qrcodeData.phone;
+					break;
+				case 'lienhe':
+					controller = '/api/QRContacts';
+					qrCodeInfo = $scope.qrcodeData.contact;
+					break;
+				case 'diachi':
+					controller = '/api/QRLocation';
+					qrCodeInfo = $scope.qrcodeData.location;
+					break;
+				case 'url':
+					controller = '/api/QRWebsites';
+					qrCodeInfo = $scope.qrcodeData.website;
+					break;
+				default:
+					break;
+			}
+			
+			if($scope.qrcodeData.id > 0){
+				var json = JSON.stringify(qrCodeInfo);
+				$http.put(ngAuthSettings.apiServiceBaseUri + controller + '/' + $scope.qrcodeData.id, json)
+				.success(function (data, status, headers, config) {
+					$scope.qrcodeData.result.Value = "data:image/png;base64," + data.code;
+					$scope.qrcodeData.result.IsLoading = false;
+					$scope.listQRCode();
+				})
+				.error(function (data, status, header, config) {
+					$scope.qrcodeData.result.IsLoading = false;
+				});
+			}
+			else{
+				$http.post(ngAuthSettings.apiServiceBaseUri + controller, JSON.stringify(qrCodeInfo))
+				.then(function (result) {
+					$scope.qrcodeData.result.IsLoading = false;
+					$scope.qrcodeData.result.Value = '';
+					if(result.data.code == undefined){
+						$scope.qrCodeError = 'Bạn cần phải đăng nhập để thực hiện chức năng này';					
+					}
+					else{
+						$scope.qrcodeData.result.Value = "data:image/png;base64," + result.data.code;
+						$scope.listQRCode();
+					}
+				},
+				function (response) {
 					$scope.qrCodeError = 'Bạn cần phải đăng nhập để thực hiện chức năng này';
 					$scope.qrcodeData.result.IsLoading = false;
 					$scope.qrcodeData.result.Value = '';
-				}
-				else{
-					$scope.qrcodeData.result.IsLoading = false;
-					$scope.qrcodeData.result.Value = "data:image/png;base64," + result.data;
-					listQRCode();
-				}
-            },
-            function (response) {
-                $scope.qrCodeError = 'Bạn cần phải đăng nhập để thực hiện chức năng này';
-                $scope.qrcodeData.result.IsLoading = false;
-                $scope.qrcodeData.result.Value = '';
-            });
+				});
+			}
         }
     };
 
@@ -194,7 +257,7 @@
     $scope.geocoder;
     $scope.marker;
 
-    initialize();
+    //initialize();
 
     function initialize() {
         $scope.geocoder = new google.maps.Geocoder();
@@ -261,36 +324,63 @@
             }
         });
     };
-
-    $scope.removeQRCode = function (id) {
-        qrCodeServices.removeQRCode(id).$promise.then(function(){
-            listQRCode();
-        });
-    };
-
-    if (authService.authentication.isAuth)
-		listQRCode();
+	
+	$scope.showUpdateQRContent = function(id){
+		$scope.qrcodeData.id = id;
+		var qrCodeData = $scope.qrcodeData;
+		var controller = '';
+		switch (qrCodeData.type) {
+			case 'vanban':
+				controller = '/api/QRContents/';
+				break;
+			case 'tinnhansms':
+				controller = '/api/QRSMS';
+				break;
+			case 'email':
+				controller = '/api/QREmails';
+				break;
+			case 'dienthoai':
+				controller = '/api/QRPhones';
+				break;
+			case 'lienhe':
+				controller = '/api/QRContacts';
+				break;
+			case 'diachi':
+				controller = '/api/QRLocation';
+				break;
+			case 'url':
+				controller = '/api/QRWebsites';
+				break;
+			default:
+				break;
+		}
 		
-    $scope.qrCodes = [];
-    $scope.qrCodeLoading = false;
-    function listQRCode() {
-        $scope.qrCodeLoading = true;
-        qrCodeServices.showQRCode().$promise.then(function (response) {
-            $scope.qrCodes = response;
-            $scope.qrCodeLoading = false;
-        }, function () {
-            $scope.qrCodeLoading = false;
-        });
-    }
-
+		$http({method: 'GET', url: ngAuthSettings.apiServiceBaseUri + controller + id}).
+			success(function(data, status, headers, config) {
+				$scope.qrcodeData.id = data.item.id;
+				$scope.qrcodeData.text.Message = data.item.content;
+				$scope.qrcodeData.createdDate = data.item.createdDate;
+				$scope.qrcodeData.updatedDate = data.item.updatedDate;
+				$scope.qrcodeData.result.Value = "data:image/png;base64," + data.code;
+				$('#qrCodeDialog').modal('toggle');
+				
+			}).
+			error(function(data, status, headers, config) 
+			{
+				$scope.qrcodeData.result.Value = '';
+			}
+		);
+	}		
 }).directive('showtab', function () {
     return {
         link: function (scope, element, attrs) {
             element.click(function (e) {
                 if (scope.qrcodeData)
                     scope.qrcodeData.type = attrs.href.substr(1, attrs.href.length);
-                e.preventDefault();
-                $(element).tab('show');
+				e.preventDefault();
+				
+				$(element).tab('show');
+				
                 if (scope.map)
                     google.maps.event.trigger(scope.map, "resize");
             });
