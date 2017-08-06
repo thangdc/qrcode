@@ -49,6 +49,7 @@
 
     $scope.logoff = function () {
         authService.logout();
+		window.location.href = window.location.href;
     }
 	
 	$scope.loginCancel = function(){

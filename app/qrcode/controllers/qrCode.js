@@ -1,6 +1,6 @@
 ﻿vietsoftApp.controller('QRCodeCtrl', 
 	function ($scope, $http, $resource, ngAuthSettings, qrCodeServices, authService) {
-    $scope.qrCodes = [];
+    /*$scope.qrCodes = [];
 	
 	$scope.paging = {
 		keyword: '',
@@ -370,7 +370,7 @@
 				$scope.qrcodeData.result.Value = '';
 			}
 		);
-	}		
+	}*/		
 }).directive('showtab', function () {
     return {
         link: function (scope, element, attrs) {
