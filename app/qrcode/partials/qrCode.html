@@ -27,6 +27,7 @@
 								<li><a showtab="" href="#listlienhe"><i class="fa fa-book"></i> Thông tin liên hệ</a></li>
 								<li><a showtab="" href="#listdiachi"><i class="fa fa-briefcase"></i> Địa chỉ</a></li>
 								<li><a showtab="" href="#listurl"><i class="fa fa-link"></i> Website</a></li>
+								<li><a showtab="" href="#listwifi"><i class="fa fa-wifi"></i> Wifi</a></li>
 								<li class="pull-right"><a class="text-muted"><i class="fa fa-gear"></i></a></li>
 							</ul>
 							<div class="tab-content">
@@ -46,9 +47,13 @@
 									<div ng-include="'/app/qrcode/partials/qrContact.html'"></div>
 								</div>
 								<div id="listdiachi" class="tab-pane">
+									<div ng-include="'/app/qrcode/partials/qrAddress.html'"></div>
 								</div>
 								<div id="listurl" class="tab-pane">
 									<div ng-include="'/app/qrcode/partials/qrWebsite.html'"></div>
+								</div>
+								<div id="listwifi" class="tab-pane">
+									<div ng-include="'/app/qrcode/partials/qrWifi.html'"></div>
 								</div>
 							</div>
 						</div>
@@ -57,186 +62,6 @@
                 
                 <div class="loading-img" data-ng-show="qrCodeLoading"></div>
             </div>
-		
-			<!--<div id="qrCodeDialog" class="modal fade" tabindex="-1" role="dialog" >				
-				<div class="modal-dialog modal-dialog-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title">QR Code</h4>
-						</div>
-						<div class="modal-body">
-							<div class="alert alert-danger" ng-show="qrCodeError.length > 0">
-								{{ qrCodeError }}
-							</div>
-							<div class="row">
-								<div class="col-md-9">
-									<div class="nav-tabs-custom">
-										<ul class="nav nav-tabs">
-											<li class="active"><a showtab="" href="#vanban" data-toggle="tab"><i class="fa fa-newspaper-o"></i> Văn bản</a></li>
-											<li><a showtab="" href="#tinnhansms" data-toggle="tab"><i class="fa fa-mobile"></i> SMS</a></li>
-											<li><a showtab="" href="#email"><i class="fa fa-envelope"></i> Email</a></li>
-											<li><a showtab="" href="#dienthoai"><i class="fa fa-phone"></i> Điện thoại</a></li>
-											<li><a showtab="" href="#lienhe"><i class="fa fa-book"></i> Thông tin liên hệ</a></li>
-											<li><a showtab="" href="#diachi"><i class="fa fa-briefcase"></i> Địa chỉ</a></li>
-											<li><a showtab="" href="#url"><i class="fa fa-link"></i> Website</a></li>
-											<li class="pull-right"><a class="text-muted"><i class="fa fa-gear"></i></a></li>
-										</ul>
-										<div class="tab-content">
-											<div class="tab-pane active" id="vanban">
-												<form role="form">
-													<div class="form-group" ng-class="qrcodeValidate.text.error == true ? 'has-warning' : ''">
-														<label ng-show="qrcodeValidate.text.error"><i class="fa fa-warning"></i> Vui lòng nhập nội dung cần mã hóa</label>
-														<textarea class="form-control qrCodeTextMessage" ng-model="qrcodeData.text.Message" rows="10" placeholder="Nội dung ..."></textarea>
-													</div>
-												</form>
-											</div>
-											<div class="tab-pane" id="tinnhansms">
-												<form role="form">
-													<div class="form-group" ng-class="qrcodeValidate.sms.number == true ? 'has-warning' : ''">
-														<label ng-show="qrcodeValidate.sms.number"><i class="fa fa-warning"></i> Vui lòng nhập số điện thoại cần mã hóa</label>
-														<input type="text" class="form-control" ng-model="qrcodeData.sms.Number" placeholder="Số điện thoại" />
-													</div>
-													<div class="form-group" ng-class="qrcodeValidate.sms.message == true ? 'has-warning' : ''">
-														<label ng-show="qrcodeValidate.sms.message"><i class="fa fa-warning"></i> Vui lòng nhập nội dung tin nhắn cần mã hóa</label>
-														<textarea class="form-control smsMessage" rows="5" ng-model="qrcodeData.sms.Message" placeholder="Nội dung tin nhắn"></textarea>
-													</div>
-												</form>
-											</div>
-											<div id="email" class="tab-pane">
-												<form role="form">
-													<div class="form-group" ng-class="qrcodeValidate.email.address == true ? 'has-warning' : ''">
-														<label ng-show="qrcodeValidate.email.address"><i class="fa fa-warning"></i> Vui lòng nhập địa chỉ email cần mã hóa</label>
-														<input type="text" class="form-control" ng-model="qrcodeData.email.EmailAddress" placeholder="Địa chỉ email" />
-													</div>
-													<div class="form-group" ng-class="qrcodeValidate.email.subject == true ? 'has-warning' : ''">
-														<label ng-show="qrcodeValidate.email.subject"><i class="fa fa-warning"></i> Vui lòng nhập tiêu đề email cần mã hóa</label>
-														<input type="text" class="form-control" ng-model="qrcodeData.email.Title" placeholder="Tiêu đề" />
-													</div>
-													<div class="form-group" ng-class="qrcodeValidate.email.body == true ? 'has-warning' : ''">
-														<label ng-show="qrcodeValidate.email.body"><i class="fa fa-warning"></i> Vui lòng nhập nội dung email cần mã hóa</label>
-														<textarea class="form-control qrCodeEmailBody" rows="5" ng-model="qrcodeData.email.Content" placeholder="Nội dung"></textarea>
-													</div>
-												</form>
-											</div>
-											<div id="dienthoai" class="tab-pane">
-												<form role="form">
-													<div class="form-group" ng-class="qrcodeValidate.phone.error == true ? 'has-warning' : ''">
-														<label ng-show="qrcodeValidate.phone.error"><i class="fa fa-warning"></i> Vui lòng nhập số điện thoại cần mã hóa</label>
-														<input type="text" class="form-control" ng-model="qrcodeData.phone.Number" placeholder="Số điện thoại" />
-													</div>
-												</form>
-											</div>
-											<div id="lienhe" class="tab-pane">
-												<form role="form">
-													<div class="form-group">
-														<input type="text" class="form-control" ng-model="qrcodeData.contact.FullName" placeholder="Tên đầy đủ" />
-													</div>
-													<div class="form-group" ng-class="qrcodeValidate.contact.phone == true ? 'has-warning' : ''">
-														<label ng-show="qrcodeValidate.contact.phone"><i class="fa fa-warning"></i> Vui lòng nhập số điện thoại cần mã hóa</label>
-														<input type="text" class="form-control" ng-model="qrcodeData.contact.Phone" placeholder="Số điện thoại" />
-													</div>
-													<div class="form-group" ng-class="qrcodeValidate.contact.email == true ? 'has-warning' : ''">
-														<label ng-show="qrcodeValidate.contact.email"><i class="fa fa-warning"></i> Vui lòng nhập địa chỉ email cần mã hóa</label>
-														<input type="text" class="form-control" ng-model="qrcodeData.contact.Email" placeholder="Địa chỉ Email" />
-													</div>
-													<div class="form-group">
-														<input type="text" class="form-control" ng-model="qrcodeData.contact.Address" placeholder="Địa chỉ" />
-													</div>
-													<div class="form-group">
-														<input type="text" class="form-control" ng-model="qrcodeData.contact.Website" placeholder="Website" />
-													</div>
-													<div class="form-group">
-														<textarea class="form-control qrCodeNotes" rows="5" ng-model="qrcodeData.contact.Note" placeholder="Ghi chú"></textarea>
-													</div>
-												</form>
-											</div>
-											<div id="diachi" class="tab-pane">
-												<div class="row">
-													<form role="form">
-														<div class="form-group" ng-class="qrcodeValidate.location.error == true ? 'has-warning' : ''">
-															<div class="col-sm-10">
-																<label ng-show="!qrcodeValidate.location.error">Địa chỉ</label>
-																<label ng-show="qrcodeValidate.location.error">
-																	<i class="fa fa-warning"></i>
-																	Vui lòng nhập địa chỉ cần tìm
-																</label>
-																<input type="text" class="form-control" value="Lê Lợi, Bến Thành, Hồ Chí Minh" ng-model="qrcodeData.location.Address" />
-															</div>
-															<div class="col-sm-2">
-																<label>&nbsp;</label>
-																<button class="btn btn-primary form-control" ng-click="lookup_Address()">Tìm kiếm</button>
-															</div>
-														</div>
-													</form>
-												</div>
-
-												<div id="map_canvas"></div>
-
-												<p id="coord">Latitude ({{ qrcodeData.location.Latitude }}) Longitude ({{ qrcodeData.location.Longitude }})</p>
-											</div>
-											<div id="url" class="tab-pane">
-												<form role="form">
-													<div class="form-group" ng-class="qrcodeValidate.website.error == true ? 'has-warning' : ''">
-														<label ng-show="!qrcodeValidate.website.error">Địa chỉ trang web</label>
-														<label ng-show="qrcodeValidate.website.error">
-															<i class="fa fa-warning"></i>
-															Vui lòng nhập địa chỉ trang web cần mã hóa
-														</label>
-														<input type="text" class="form-control" ng-model="qrcodeData.website.Url">
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-									<div class="callout callout-info">
-										<p>Để mã hóa địa chỉ trang web bạn nhập địa chỉ trang web cần mã hóa.</p>
-										<p>Sau khi nhập xong nhấn nút "Tạo mã" để chương trình tạo mã QR Code và hiển thị vào khung kết quả bên tay phải.</p>
-										<p>Nếu bạn muốn bảo mật nội dung cần mã hóa thì bạn nhấn chọn vào checkbox "Sử dụng mật khẩu" để trang web mã hóa mã QR code của bạn bằng mật khẩu, và chỉ những người nhập đúng mật khẩu mã hóa mới đọc được nội dung của bạn.</p>
-										<p>Nếu bạn muốn giới hạn thời gian xem mã QR Code bạn hãy nhập số giờ hoặc số phút mã mã QR code của bạn tồn tại, nếu sau khoảng thời gian này mà QR code không được giải mã thì sẽ không ai có thể đọc được nội dung mà bạn đã mã hóa.</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="box box-solid box-primary">
-										<div class="box-header">
-											<h3 class="box-title">Kết quả</h3>
-										</div>
-										<div class="box-body">
-											<div class="qrCodeResult">
-												<img alt="" ng-src="{{ qrcodeData.result.Value }}" class="qrCodeImage" />
-											</div>
-										</div>
-										<div class="overlay" ng-show="qrcodeData.result.IsLoading"></div>
-										<div class="loading-img" ng-show="qrcodeData.result.IsLoading"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<div class="row">
-								<div class="col-md-2">
-									<label style="margin-top: 5px;">
-										<input type="checkbox" ng-model="qrcodeData.encrypt.IsEncrypt"> Sử dụng mật khẩu
-									</label>
-								</div>
-								<div class="col-md-3">
-									<input type="password" ng-disabled="!qrcodeData.encrypt.IsEncrypt" ng-model="qrcodeData.encrypt.Password" class="form-control" placeholder="Mật khẩu">
-								</div>
-								<div class="col-md-2">
-									<input type="number" ng-disabled="!qrcodeData.encrypt.IsEncrypt" ng-model="qrcodeData.encrypt.Hours" class="form-control" placeholder="Giờ">
-								</div>
-								<div class="col-md-2">
-									<input type="number" ng-disabled="!qrcodeData.encrypt.IsEncrypt" ng-model="qrcodeData.encrypt.Minutes" class="form-control" placeholder="Phút">
-								</div>
-								<div class="col-md-3">
-									<button type="button" class="btn btn-warning" data-dismiss="modal">Hủy bỏ</button>
-									<button type="button" class="btn btn-primary" ng-click="generateQRCode()">Tạo mã QR Code</button>								
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>-->
         </section> 
     </aside>
 </div>

@@ -34,6 +34,7 @@ var serviceBase = 'http://service.thangdc.com';
 vietsoftApp.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'qrcode.thangdc.com'
+	//clientId: 'test'
 });
 
 
