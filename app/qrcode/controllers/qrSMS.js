@@ -7,8 +7,12 @@ vietsoftApp.controller('QRSMSCtrl',['$scope', '$http', '$resource', 'ngAuthSetti
 		$scope.qrCodeLoading = false;
 		$scope.isLoading = false;
 		$scope.qrCodeError = '';
-		$scope.qrcodeValidate.phoneNumber = false;
-		$scope.qrcodeValidate.message = false;
+		
+		$scope.qrcodeValidate = {
+			phoneNumber: false,
+			message: false
+		};
+		
 		$scope.saveButton = 'Tạo mã QR Code';
 		
 		$scope.paging = {

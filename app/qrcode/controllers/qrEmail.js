@@ -11,9 +11,11 @@ vietsoftApp.controller('QREmailCtrl',['$scope', '$http', '$resource', 'ngAuthSet
 		$scope.isLoading = false;
 		$scope.qrCodeError = '';
 		
-		$scope.qrcodeValidate.email = false;
-		$scope.qrcodeValidate.subject = false;
-		$scope.qrcodeValidate.content = false;
+		$scope.qrcodeValidate = {
+			email: false,
+			subject: false,
+			content: false
+		}
 		
 		$scope.saveButton = 'Tạo mã QR Code';
 		
