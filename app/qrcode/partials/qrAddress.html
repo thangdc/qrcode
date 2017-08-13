@@ -2,13 +2,13 @@
 	<div style="margin-bottom: 20px;">
 		<div class="form-inline pull-left">
 			<div class="form-group">
-				<input type="text" ng-model="paging.keyword" class="form-control" ng-keypress="enterSearch($event)" />
+				<input type="text" ng-model="paging.keyword" class="form-control" ng-keypress="enterSearch($event)" ng-change="search()" />
 			</div>
 			<button class="btn btn-primary" ng-click="search()">Tìm kiếm</button>
 		</div>
 		<div class="pull-right">
-			<button class="btn btn-warning" ng-click="exportQRCode()">Export</button>
-			<button class="btn btn-warning" ng-click="importQRCode()">Import</button>
+			<button class="btn btn-warning" ng-click="exportQRCode('Address')">Export</button>
+			<button class="btn btn-warning" ng-click="importQRCode('Address')">Import</button>
 			<button class="btn btn-danger" ng-click="deleteSelectedQRCode()">Xóa QR Code</button>
 			<button class="btn btn-primary" data-toggle="modal" ng-click="showQRCodeDialog()">Tạo mã QR Code</button>
 		</div>

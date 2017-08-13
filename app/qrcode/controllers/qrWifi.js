@@ -93,11 +93,7 @@ vietsoftApp.controller('QRWifiCtrl',['$scope', '$http', '$resource', 'ngAuthSett
 		}
 		
 		$scope.search = function(){
-			var query = $scope.paging.keyword;
 			$scope.paging.pageIndex = 1;
-			if($scope.paging.keyword == '')
-				query = 'EMPTY';
-				
 			$scope.listQRCode();
 		}
 		
@@ -114,14 +110,15 @@ vietsoftApp.controller('QRWifiCtrl',['$scope', '$http', '$resource', 'ngAuthSett
 		$scope.listQRCode = function () {
 			$scope.qrCodeLoading = true;
 			
-			var query = $scope.paging.keyword;
-			if($scope.paging.keyword == ''){
-				query = 'EMPTY';
-			}
+			var params = {
+				PageIndex: $scope.paging.pageIndex,
+				PageSize: $scope.paging.pageSize,
+				Keyword: $scope.paging.keyword
+			};
 			
-			var url = $scope.controllerUrl + 'paging/'+ query +'/'+ $scope.paging.pageSize +'/' + $scope.paging.pageIndex;
+			var url = $scope.controllerUrl + 'paging';
 			
-			$http({method: 'GET', url: url}).
+			$http({method: 'GET', url: url, params: params}).
 				success(function(data, status, headers, config) {
 					
 					$scope.qrCodes = data.items;
@@ -242,14 +239,6 @@ vietsoftApp.controller('QRWifiCtrl',['$scope', '$http', '$resource', 'ngAuthSett
 					}
 				);
 			}
-		}
-		
-		$scope.exportQRCode = function(){
-			alert('export');
-		}
-		
-		$scope.importQRCode = function(){
-			alert('import');
 		}
 		
 		$scope.init = function(){

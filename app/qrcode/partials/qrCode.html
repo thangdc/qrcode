@@ -58,6 +58,69 @@
 							</div>
 						</div>
 					</div>
+					
+					<div id="exportDialog" class="modal fade" tabindex="-1" role="dialog">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title">Xuất mã QR Code</h4>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="col-md-4">
+											<button class="btn btn-warning btn-block" ng-click='exportToExcel()'>Xuất ra Excel</button>
+											<div class="alert alert-warning fade in">
+												Xuất dữ liệu ra tập tin excel (.xlsx)
+											</div>
+										</div>
+										<div class="col-md-4">
+											<button class="btn btn-danger btn-block" ng-click='exportToWord()'>Xuất ra Word</button>
+											<div class="alert alert-danger fade in">
+												Xuất mã QR Code ra Word (.docx)
+											</div>										
+										</div>
+										<div class="col-md-4">
+											<button class="btn btn-primary btn-block" ng-click='exportToQRCode()'>Xuất ra QR Code</button>
+											<div class="alert alert-info fade in">
+												Xuất dữ liệu ra hình QR Code (.zip)
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="importDialog" class="modal fade" tabindex="-1" role="dialog">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title">Nhập mã QR Code</h4>
+								</div>
+								<div class="modal-body">									
+									<div class="alert alert-info fade in">
+										<div class="form-inline">
+										<label>Chọn tập tin excel (.xlsx)</label>
+										<div class="form-group">
+											<input id="fileUpload" type="file"  accept=".xlsx" class="form-control" />
+										</div>
+									</div>
+									</div>	
+								</div>
+								<div class="modal-footer">
+									<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+									<button type="button" class="btn btn-primary" ng-click="importQRCodeData()">Import</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
                 </div>
                 
                 <div class="loading-img" data-ng-show="qrCodeLoading"></div>
