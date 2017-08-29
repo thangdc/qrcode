@@ -253,6 +253,12 @@ vietsoftApp.controller('QREmailCtrl',['$scope', '$http', '$resource', 'ngAuthSet
 				$scope.listQRCode();
 		}
 		
+        $scope.$on('reloadData', function (event, data) {
+	        if (data.tab == 'Email') {
+	            $scope.init();
+	        }
+	    });
+
 		$scope.init();
 	}
 ]);

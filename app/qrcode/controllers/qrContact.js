@@ -244,6 +244,12 @@ vietsoftApp.controller('QRContactCtrl',['$scope', '$http', '$resource', 'ngAuthS
 				$scope.listQRCode();
 		}
 		
+        $scope.$on('reloadData', function (event, data) {
+	        if (data.tab == 'Contact') {
+	            $scope.init();
+	        }
+	    });
+
 		$scope.init();
 	}
 ]);

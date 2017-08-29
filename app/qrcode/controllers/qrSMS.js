@@ -241,6 +241,12 @@ vietsoftApp.controller('QRSMSCtrl',['$scope', '$http', '$resource', 'ngAuthSetti
 				$scope.listQRCode();
 		}
 		
+        $scope.$on('reloadData', function (event, data) {
+	        if (data.tab == 'SMS') {
+	            $scope.init();
+	        }
+	    });
+
 		$scope.init();
 	}
 ]);

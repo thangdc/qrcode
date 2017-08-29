@@ -310,6 +310,12 @@ vietsoftApp.controller('QRAddressCtrl',['$scope', '$http', '$resource', 'ngAuthS
 			initialize();
 		}
 		
+        $scope.$on('reloadData', function (event, data) {
+	        if (data.tab == 'Address') {
+	            $scope.init();
+	        }
+	    });
+
 		$scope.init();
 	}
 ]);

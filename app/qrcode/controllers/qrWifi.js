@@ -246,6 +246,12 @@ vietsoftApp.controller('QRWifiCtrl',['$scope', '$http', '$resource', 'ngAuthSett
 				$scope.listQRCode();
 		}
 		
+        $scope.$on('reloadData', function (event, data) {
+	        if (data.tab == 'Wifi') {
+	            $scope.init();
+	        }
+	    });
+
 		$scope.init();
 	}
 ]);

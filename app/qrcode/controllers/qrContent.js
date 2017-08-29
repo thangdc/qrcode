@@ -228,6 +228,12 @@ vietsoftApp.controller('QRContentCtrl',['$scope', '$http', '$resource', 'ngAuthS
 			if (authService.authentication.isAuth)
 				$scope.listQRCode();
 		}
+
+        $scope.$on('reloadData', function (event, data) {
+	        if (data.tab == 'Content') {
+	            $scope.init();
+	        }
+	    });
 		
 		$scope.init();
 	}

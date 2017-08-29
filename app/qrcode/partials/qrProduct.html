@@ -1,0 +1,123 @@
+<div ng-controller="QRProductCtrl">
+	<div style="margin-bottom: 20px;">
+		<div class="form-inline pull-left">
+			<div class="form-group">
+				<input type="text" ng-model="paging.keyword" class="form-control" ng-keypress="enterSearch($event)" ng-change="search()" />
+			</div>
+			<button class="btn btn-primary" ng-click="search()">Tìm kiếm</button>
+		</div>
+		<div class="pull-right">
+			<button class="btn btn-warning" ng-click="exportQRCode('Product')">Export</button>
+			<button class="btn btn-warning" ng-click="importQRCode('Product')">Import</button>
+			<button class="btn btn-danger" ng-click="deleteSelectedQRCode()">Xóa QR Code</button>
+			<button class="btn btn-primary" data-toggle="modal" ng-click="showQRCodeDialog()">Tạo mã QR Code</button>
+		</div>
+		<br style="clear: both" />
+	</div>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<td style="width: 40px; text-align: center;"><input ng-click="checkAll($event, 'qrcodeProduct')" name='all' type="checkbox" /></td>
+				<th>Mã Sản Phẩm</th>
+				<th>Tên Sản Phẩm</th>
+				<th>Giá</th>
+				<th>Mô Tả</th>
+                <th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="qr in qrCodes">
+				<td style="width: 40px; text-align: center;"><input type="checkbox" value="{{ qr.id }}" name="qrcodeProduct" /></td>
+				<td>{{ qr.code }}</td>
+				<td>{{ qr.name }}</td>
+				<td>{{ qr.price }}</td>
+                <td>{{ qr.description }}</td>
+				<td style="width: 180px; text-align: center;">
+					<button class="btn btn-primary" ng-click="showUpdateQRCode(qr.id)">Chỉnh sửa</button>
+					<button class="btn btn-danger" ng-click="deleteQRCode(qr.id)">Xóa</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<span style="padding-top: 25px" class="pull-left">Hiển thị từ {{ paging.from }} đến {{ paging.to }} trong tổng số {{ paging.totalCount }} mẫu tin</span>
+		<nav aria-label="..." class="pull-right">
+		  <ul class="pagination">
+			<li class="page-item" ng-class="paging.hasPrevious == false ? 'disabled' : ''">
+			  <a class="page-link" ng-click="previous()" tabindex="-1">Quay lại</a>
+			</li>
+			<li class="page-item" ng-class="paging.hasNext == false? 'disabled' : ''">
+			  <a class="page-link" ng-click="next()">Tiếp theo</a>
+			</li>
+		  </ul>
+		</nav>
+		<br style="clear: both"/>
+	</div>
+	<div class="overlay" data-ng-show="qrCodeLoading"></div>
+	
+	<!-- New Dialog -->
+	<div id="qrCodeProductDialog" class="modal fade" tabindex="-1" role="dialog" >
+		<div class="modal-dialog modal-dialog-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">QR Code</h4>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger" ng-show="qrCodeError.length > 0">
+						{{ qrCodeError }}
+					</div>
+					<div class="row">
+						<div class="col-md-9">
+							<div class="box box-solid box-primary">
+								<div class="box-header">
+									<h3 class="box-title">Sản Phẩm</h3>
+								</div>
+								<div class="box-body">
+									<div class="form-group" ng-class="qrcodeValidate.code == true ? 'has-warning' : ''">
+										<label ng-show="qrcodeValidate.code"><i class="fa fa-warning"></i> Vui lòng nhập mã sản phẩm cần mã hóa</label>
+										<input type="text" class="form-control" ng-model="qrcodeProduct.item.code" placeholder="Mã sản phẩm" />
+									</div>
+									<div class="form-group" ng-class="qrcodeValidate.name == true ? 'has-warning' : ''">
+										<label ng-show="qrcodeValidate.name"><i class="fa fa-warning"></i> Vui lòng nhập tên sản phẩm cần mã hóa</label>
+										<input type="text" class="form-control" ng-model="qrcodeProduct.item.name" placeholder="Tên sản phẩm" />
+									</div>
+									<div class="form-group" ng-class="qrcodeValidate.price == true ? 'has-warning' : ''">
+										<label ng-show="qrcodeValidate.price"><i class="fa fa-warning"></i> Vui lòng nhập giá cần mã hóa</label>
+										<input type="text" class="form-control" ng-model="qrcodeProduct.item.price" placeholder="Giá" />
+									</div>
+                                    <div class="form-group" ng-class="qrcodeValidate.description == true ? 'has-warning' : ''">
+										<label ng-show="qrcodeValidate.description"><i class="fa fa-warning"></i> Vui lòng nhập nội dung mô tả cần mã hóa</label>
+										<textarea class="form-control" rows="5" ng-model="qrcodeProduct.item.description" placeholder="Mô Tả"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="box box-solid box-primary">
+								<div class="box-header">
+									<h3 class="box-title">Kết quả</h3>
+								</div>
+								<div class="box-body">
+									<div class="qrCodeResult">
+										<img alt="" ng-src="{{ qrcodeProduct.code }}" class="qrCodeImage" />
+									</div>
+								</div>
+								<div class="overlay" ng-show="isLoading"></div>
+								<div class="loading-img" ng-show="isLoading"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-warning" data-dismiss="modal">Hủy bỏ</button>
+					<button class="btn btn-primary" ng-click="SaveQRCode()">{{ saveButton }}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Import Dialog -->
+	
+	<!-- Export Dialog -->
+</div>

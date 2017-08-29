@@ -1,4 +1,4 @@
-﻿vietsoftApp.factory('qrCodeServices', function ($resource, ngAuthSettings) {
+﻿vietsoftApp.factory('qrCodeServices', ['$resource','ngAuthSettings','$rootScope', function ($resource, ngAuthSettings, $rootScope) {
 
     var result = {};
 
@@ -14,10 +14,15 @@
         return $resource(ngAuthSettings.apiServiceBaseUri + '/api/QRCode/DecodeBHYT').save({ data: image });
     }
 
+    function reloadData(data) {
+        $rootScope.$broadcast('reloadData', { tab: data });
+    }
+
     result.showQRCode = _listQrCode;
     result.removeQRCode = _removeQRCode;
     result.decodeQRCodeBHYT = _decodeBHYT;
+    result.reloadData = reloadData;
 
     return result;
 
-});
+}]);

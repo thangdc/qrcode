@@ -235,6 +235,12 @@ vietsoftApp.controller('QRPhonesCtrl',['$scope', '$http', '$resource', 'ngAuthSe
 				$scope.listQRCode();
 		}
 		
+        $scope.$on('reloadData', function (event, data) {
+	        if (data.tab == 'Phone') {
+	            $scope.init();
+	        }
+	    });
+
 		$scope.init();
 	}
 ]);

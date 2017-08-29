@@ -235,6 +235,12 @@ vietsoftApp.controller('QRWebsiteCtrl',['$scope', '$http', '$resource', 'ngAuthS
 				$scope.listQRCode();
 		}
 		
+        $scope.$on('reloadData', function (event, data) {
+	        if (data.tab == 'Website') {
+	            $scope.init();
+	        }
+	    });
+
 		$scope.init();
 	}
 ]);
