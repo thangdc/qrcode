@@ -7,7 +7,8 @@
 			</div>
 			<div class="modal-body">
 				<div class="alert alert-info" role="alert">
-				  Mật khẩu của bạn sẽ được mã hóa trước khi lưu trữ, chúng tôi đảm bảo thông tin đăng ký sẽ không được sử dụng hoặc chia sẽ cho bất kỳ bên nào nếu chưa được sự đồng ý của bạn.
+				  Mật khẩu của bạn sẽ được mã hóa trước khi lưu trữ, chúng tôi đảm bảo thông tin đăng ký sẽ không được sử dụng hoặc chia sẽ cho bất kỳ bên nào nếu chưa được sự đồng ý của bạn.<br/>
+				  Mật khẩu phải có ít nhất 6 ký tự. Mật khẩu phải có ít nhất một ký tự không phải chữ cái hoặc chữ số. Mật khẩu phải có ít nhất một chữ thường ('a' - 'z'). Mật khẩu phải có ít nhất một chữ hoa ('A' - 'Z'). Mật khẩu phải có ít nhất một số (0 - 9)
 				</div>
 				<form novalidate>
 					<div>
@@ -25,8 +26,7 @@
 						</div>
 						<div class="form-group">
 							<label>Mật khẩu</label>
-							<input type="password" ng-model="userRegister.Password" class="form-control" placeholder="Mật khẩu" /><br/>
-							Mật khẩu phải có ít nhất 6 ký tự. Mật khẩu phải có ít nhất một ký tự không phải chữ cái hoặc chữ số. Mật khẩu phải có ít nhất một chữ thường ('a' - 'z'). Mật khẩu phải có ít nhất một chữ hoa ('A' - 'Z').
+							<input type="password" ng-model="userRegister.Password" class="form-control" placeholder="Mật khẩu" />
 						</div>
 						<div class="form-group">
 							<label>Xác nhận mật khẩu</label>
