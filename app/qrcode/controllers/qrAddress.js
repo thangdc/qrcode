@@ -198,6 +198,9 @@ vietsoftApp.controller('QRAddressCtrl',['$scope', '$http', '$resource', 'ngAuthS
 					.then(function (result) {
 						$scope.isLoading = false;
 						$scope.qrcodeAddress.code = '';
+						if(result.data.indexOf('Use a local account to log in') != -1){
+							authService.logout();
+						}
 						if(result.data.code == undefined){
 							$scope.qrCodeError = 'Bạn cần phải đăng nhập để thực hiện chức năng này';					
 						}
