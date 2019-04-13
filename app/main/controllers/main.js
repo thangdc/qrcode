@@ -368,5 +368,5 @@
 	    if (!authService.authentication.isAuth)
 	        $location.path('/login');
 		
-		window.location.href = 'http://www.thangdc.com';
+		//window.location.href = 'http://www.thangdc.com';
 	} ]);
