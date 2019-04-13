@@ -4,19 +4,19 @@ vietsoftApp.config(['$routeProvider', '$locationProvider', function ($routeProvi
 
     $routeProvider.
         when('/', {
-            templateUrl: '/app/qrcode/partials/qrCode.html',
+            templateUrl: '/qrcode/app/qrcode/partials/qrCode.html',
             controller: 'QRCodeCtrl'
         })
 		.when('/emailMarketing', {
-            templateUrl: '/app/emailMarketing/partials/emailMarketing.html',
+            templateUrl: '/qrcode/app/emailMarketing/partials/emailMarketing.html',
             controller: 'EmailMarketingCtrl'
         })
         .when('/qrCodeBHYT', {
-            templateUrl: '/app/qrcode/partials/qrCodeBHYT.html',
+            templateUrl: '/qrcode/app/qrcode/partials/qrCodeBHYT.html',
             controller: 'QRCodeBHYTCtrl'
         })
 		.when('/ocr', {
-            templateUrl: '/app/ocr/partials/imageToText.html',
+            templateUrl: '/qrcode/app/ocr/partials/imageToText.html',
             controller: 'ImageToTextCtrl'
         })
         .otherwise({
